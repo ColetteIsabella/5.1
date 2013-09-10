@@ -1,0 +1,26 @@
+<h1>Who are the users?</h1>
+<p>Can we trust them?</p>
+<table>
+  <thead>
+    <tr>
+      <th>First_Name</th>
+      <th>Last_Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "Show", user %></td>
+        <td><%= link_to "Edit", edit_user_path(user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "New User", new_user_path %>
