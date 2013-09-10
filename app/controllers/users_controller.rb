@@ -5,7 +5,6 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
   end
 
   def show
-    @user = User.show(params[:id])
   end
 
   def new
@@ -13,31 +12,30 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def create
     @user = User.new(params[:id])
 
     if @user.save
-      flash[:alert]= "User has been saved."
-      redirect_to user_url(@users)
+      flash[:notice]= "User has been saved."
+      redirect_to root_url
     else
-      flash[:alert]="User has not been created."
+      flash[:notice]="User has not been created."
       render action: "new"
-  end
-end
+     end
+   end
+
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(params[:id])
+    if @user.update(user_params)
       flash[:notice] = "User has been updated."
-      redirect_to user_url(@user)
+      redirect_to root_url
     else
-      flash[:notice] = "User cannot be updated."
-      redirect_to edit_user_url
+      flash[:notice] = "User cannot be updated"
     end
   end
+
 
 
   def destroy
@@ -49,7 +47,7 @@ end
 private
 
   def set_user
-    @user = User.for(current_user).find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params
